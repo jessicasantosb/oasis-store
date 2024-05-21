@@ -1,19 +1,27 @@
+import { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
+import { CartContext } from '../contexts/CartContext';
+import { ProductProps } from '../pages/Home';
 
-interface Card {
-  title: string;
-  image: string;
-  price: string;
-}
+export default function Card(card: ProductProps) {
+  const { addItemToCard } = useContext(CartContext);
 
-export default function Card(card: Card) {
+  const handleAddItemToCart = (card: ProductProps) => {
+    addItemToCard(card);
+  };
+
   return (
     <>
       <img src={card.image} alt={card.title} className='h-[50%]' />
-      <h2 className='py-2 text-center'>{card.title}</h2>
-      <div className='w-full flex items-center gap-2 justify-center flex-col tablet:flex-row tablet:justify-between'>
-        <p className='font-bold text-xl'>{card.price}</p>
-        <button className='flex items-center gap-2 p-[5px] rounded bg-gray-200'>
+      <h2 className='py-2 text-center text-sm'>{card.title}</h2>
+      <div className='w-full flex items-center gap-2 justify-between'>
+        <p className='text-md'>
+          $<span className='font-bold text-xl'>{card.price}</span>
+        </p>
+        <button
+          className='p-[5px] m-2 rounded-sm bg-gray-200'
+          onClick={() => handleAddItemToCart(card)}
+        >
           <FaShoppingCart />
         </button>
       </div>

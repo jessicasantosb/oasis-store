@@ -1,15 +1,29 @@
-import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { CartContext } from '../contexts/CartContext';
 
 export default function Header() {
+  const {cartAmount} = useContext(CartContext);
+
   return (
-    <header className="bg-gray-200">
-      <nav className="container h-12 flex justify-between items-center mx-auto">
-        <Link to={'/'} className="font-bold">Oasis Store</Link>
-        <Link to={'/cart'} className="bg-gray-500 text-white rounded-full p-2">
-            <FaShoppingCart />   
-        </Link>      
+    <header className='bg-gray-200'>
+      <nav className='container h-14 flex justify-between items-center mx-auto p-2'>
+        <Link to={'/'} className='font-bold text-lg'>
+          Oasis Store
+        </Link>
+        <Link
+          to={'/cart'}
+          className='relative bg-gray-500 text-white rounded-sm p-2'
+        >
+          <FaShoppingCart />
+          {cartAmount > 0 && (
+            <span className='absolute -left-2 w-4 h-4 flex items-center justify-center rounded-sm text-xs bg-red-500'>
+              {cartAmount}
+            </span>
+          )}
+        </Link>
       </nav>
     </header>
-  )
+  );
 }
