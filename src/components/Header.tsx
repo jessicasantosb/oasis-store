@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 
 export default function Header() {
-  const {cartAmount} = useContext(CartContext);
+  const {cartAmount, handleCartModal} = useContext(CartContext);
 
   return (
-    <header className='bg-gray-200'>
+    <header className='bg-gray-200 fixed w-full'>
       <nav className='container h-14 flex justify-between items-center mx-auto p-2'>
         <Link to={'/'} className='font-bold text-lg'>
           Oasis Store
         </Link>
-        <Link
-          to={'/cart'}
+      
+        <button
+        onClick={handleCartModal}
           className='relative bg-gray-500 text-white rounded-sm p-2'
         >
           <FaShoppingCart />
@@ -22,7 +23,7 @@ export default function Header() {
               {cartAmount}
             </span>
           )}
-        </Link>
+        </button>
       </nav>
     </header>
   );
