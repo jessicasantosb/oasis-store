@@ -1,10 +1,11 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import './App.css'
-import Home from './pages/Home'
-import Layout from './components/Layout'
+import { Toaster } from 'react-hot-toast';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
+import Layout from './components/Layout';
+import CartProvider from './contexts/CartContext';
+import Home from './pages/Home';
 
 function App() {
-
   const router = createBrowserRouter([
     {
       path: '/',
@@ -12,13 +13,20 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />
-        }
-      ]
-    }
-  ])
+          element: <Home />,
+        },
+      ],
+    },
+  ]);
 
-  return <RouterProvider router={router}/>
+  return (
+    <>
+      <CartProvider>
+        <Toaster position='top-center' reverseOrder={false} />
+        <RouterProvider router={router} />
+      </CartProvider>
+    </>
+  );
 }
 
-export default App
+export default App;

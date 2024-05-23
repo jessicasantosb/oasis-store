@@ -5,7 +5,7 @@ export default function CartCard(product: CartProps) {
   const { addItemToCart, removeItemFromCart } = useContext(CartContext);
 
   return (
-    <div className='h-24 mb-4 flex justify-between items-center gap-2 bg-white p-2 rounded'>
+    <div className='h-24 flex justify-between items-center gap-2 p-2 rounded'>
       <div className='h-14 w-14 flex items-center justify-center'>
         <img
           src={product.image}
@@ -16,7 +16,7 @@ export default function CartCard(product: CartProps) {
 
       <p className='w-24 text-[0.75rem] line-clamp-3'>{product.title}</p>
 
-      <h4 className='font-bold'>
+      <h4 className='text-[#eabf00]'>
         {product.total.toLocaleString('us', {
           style: 'currency',
           currency: 'USD',
